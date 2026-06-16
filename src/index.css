@@ -1,11 +1,12 @@
 :root {
   --color-bg: #000000;
-  --color-card-bg: rgba(15, 15, 15, 0.85); /* Slightly darker for better contrast with grid */
+  --color-card-bg: rgba(15, 15, 15, 0.85);
   --color-card-border: rgba(255, 255, 255, 0.15);
   --color-text: #ffffff;
-  --color-text-muted: #a1a1aa; /* zinc-400 */
+  --color-text-muted: #a1a1aa;
   --color-accent: #FFD600;
   --color-accent-hover: #FACC15;
+  --color-success: #22c55e;
 }
 
 * {
@@ -42,10 +43,22 @@ body {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--color-card-border);
-  border-radius: 12px; /* Slightly sharper for technical feel */
+  border-radius: 12px;
 }
 
-/* Typography */
+/* Typography & Header */
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
 h1 {
   font-size: 2rem;
   font-weight: 900;
@@ -70,6 +83,38 @@ h1 {
   color: var(--color-accent);
   font-size: 0.5em;
   margin-bottom: 0.5em;
+}
+
+/* Live Status */
+.live-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--color-accent);
+  padding: 4px 8px;
+  border-radius: 20px;
+  background: rgba(255, 214, 0, 0.05);
+}
+
+.live-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--color-success);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--color-success);
+  animation: blink 1.5s infinite ease-in-out;
+}
+
+.live-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--color-accent);
+  letter-spacing: 0.05em;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
 }
 
 /* Form Styles */
@@ -172,17 +217,16 @@ h1 {
   padding: 24px;
   display: flex;
   flex-direction: column;
-  overflow: hidden; /* Hide overflow from bg grid */
+  overflow: hidden;
 }
 
 .card-back {
   transform: rotateY(180deg);
   justify-content: center;
   align-items: center;
-  gap: 32px;
+  gap: 20px;
+  padding-top: 32px;
 }
-
-/* --- TECHNICAL DESIGN ELEMENTS --- */
 
 /* Grid Background */
 .tech-bg {
@@ -194,7 +238,7 @@ h1 {
   background-position: center center;
 }
 
-/* Crosshairs */
+/* Crosshairs & Scales */
 .crosshair {
   position: absolute;
   width: 10px;
@@ -214,7 +258,6 @@ h1 {
 .bottom-left { bottom: 12px; left: 12px; }
 .bottom-right { bottom: 12px; right: 12px; }
 
-/* Scale Rules */
 .scale-rule {
   position: absolute;
   opacity: 0.3;
@@ -238,8 +281,7 @@ h1 {
   background-image: repeating-linear-gradient(to bottom, transparent, transparent 4px, var(--color-text) 4px, var(--color-text) 5px);
 }
 
-/* --- FRONT CARD CONTENT --- */
-
+/* Front Card Content */
 .card-header {
   display: flex;
   justify-content: space-between;
@@ -297,13 +339,13 @@ h1 {
   flex-grow: 1;
   position: relative;
   z-index: 2;
-  gap: 16px;
+  gap: 12px;
 }
 
 .profile-container {
   position: relative;
-  width: 160px;
-  height: 160px;
+  width: 140px;
+  height: 140px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -324,8 +366,8 @@ h1 {
 }
 
 .profile-placeholder {
-  width: 120px;
-  height: 120px;
+  width: 110px;
+  height: 110px;
   border-radius: 50%;
   background: linear-gradient(145deg, #18181b, #000000);
   border: 1px solid rgba(255,214,0, 0.3);
@@ -338,7 +380,7 @@ h1 {
   box-shadow: 0 0 20px rgba(255, 214, 0, 0.1);
   position: relative;
   z-index: 2;
-  overflow: hidden; /* Ensure image stays inside circle */
+  overflow: hidden;
 }
 
 .profile-img {
@@ -348,12 +390,46 @@ h1 {
   object-fit: cover;
 }
 
+/* Timer */
+.timer-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.timer-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--color-text-muted);
+}
+
+.time-left {
+  color: var(--color-accent);
+  font-weight: bold;
+}
+
+.timer-bar-bg {
+  width: 120px;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.timer-bar-fill {
+  height: 100%;
+  background-color: var(--color-accent);
+  transition: width 1s linear;
+}
+
 .info-section {
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .name-wrapper {
@@ -364,15 +440,15 @@ h1 {
 }
 
 .name {
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   font-weight: 800;
   letter-spacing: -0.02em;
 }
 
 .signature {
-  font-family: 'Georgia', serif; /* Fallback to standard serif for signature look if no custom font */
+  font-family: 'Georgia', serif;
   font-style: italic;
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: var(--color-text-muted);
   opacity: 0.8;
 }
@@ -399,42 +475,84 @@ h1 {
   letter-spacing: 0.05em;
 }
 
-.card-footer {
+/* Front Footer */
+.card-footer-front {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
   margin-top: auto;
   position: relative;
   z-index: 2;
+  gap: 16px;
+}
+
+.dynamic-qr-front {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  background-color: #fff;
+  border-radius: 4px;
+  padding: 4px;
+  overflow: hidden;
+}
+
+.dynamic-qr-front svg {
+  width: 100%;
+  height: 100%;
+}
+
+.qr-scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--color-success);
+  box-shadow: 0 0 6px var(--color-success);
+  animation: scan 2s linear infinite alternate;
+  z-index: 10;
+}
+
+@keyframes scan {
+  from { top: 0; }
+  to { top: calc(100% - 2px); }
+}
+
+.barcode-slogan-wrapper {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
 }
 
 .barcode-container {
-  height: 24px;
+  height: 20px;
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   opacity: 0.8;
 }
 
 .slogan {
   font-style: italic;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: rgba(255, 255, 255, 0.4);
-  text-align: center;
+  text-align: right;
 }
 
-/* --- BACK CARD CONTENT --- */
-
+/* Back Card Content */
 .back-ver {
   position: absolute;
   top: 24px;
   letter-spacing: 0.1em;
 }
 
-.qr-container {
+.qr-container-back {
   position: relative;
   padding: 16px;
+  margin-top: 24px;
 }
 
 .qr-brackets {
@@ -448,18 +566,20 @@ h1 {
 .qr-brackets.bottom-left { bottom: 0; left: 0; border-right: none; border-top: none; }
 .qr-brackets.bottom-right { bottom: 0; right: 0; border-left: none; border-top: none; }
 
-.qr-placeholder {
+.qr-placeholder-large {
   width: 140px;
   height: 140px;
-  background-color: var(--color-bg); /* Dark QR background */
+  background-color: var(--color-bg);
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 8px;
+  border-radius: 8px;
 }
 
-.qr-placeholder svg {
-  width: 140px;
-  height: 140px;
+.qr-placeholder-large svg {
+  width: 100%;
+  height: 100%;
 }
 
 .auth-data-container {
@@ -484,4 +604,38 @@ h1 {
   border: 1px dashed rgba(255,255,255,0.2);
   padding: 8px 16px;
   border-radius: 4px;
+}
+
+/* Wallet Buttons */
+.wallet-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: auto;
+  margin-bottom: 8px;
+  width: 100%;
+  justify-content: center;
+}
+
+.wallet-btn {
+  background-color: #000;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.wallet-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.wallet-btn:active {
+  transform: scale(0.95);
 }
