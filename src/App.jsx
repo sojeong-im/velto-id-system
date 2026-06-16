@@ -40,7 +40,6 @@ function App() {
             id="userId"
             className="input-field"
             type="text"
-            placeholder="예: toqn1"
             value={userId}
             onChange={(e) => setUserId(e.target.value)}
           />
@@ -52,7 +51,6 @@ function App() {
             id="name"
             className="input-field"
             type="text"
-            placeholder="예: 김세희"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
