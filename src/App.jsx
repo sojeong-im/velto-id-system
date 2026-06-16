@@ -19,7 +19,16 @@ function App() {
     setIsFlipped(!isFlipped);
   };
 
-  const getProfileInitials = (fullName) => {
+  const renderProfileContent = (fullName) => {
+    if (fullName === '임소정') {
+      return (
+        <img 
+          src="/sojeong.jpg" 
+          alt="Profile" 
+          style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} 
+        />
+      );
+    }
     if (!fullName) return '';
     return fullName.substring(0, 2);
   };
@@ -76,7 +85,7 @@ function App() {
               
               <div className="profile-section">
                 <div className="profile-placeholder">
-                  {getProfileInitials(name)}
+                  {renderProfileContent(name)}
                 </div>
                 
                 <div className="info-section">
