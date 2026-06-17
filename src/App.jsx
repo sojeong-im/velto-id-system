@@ -4,8 +4,8 @@ import './index.css';
 function App() {
   const [userId, setUserId] = useState('');
   const [name, setName] = useState('');
-  const [dept, setDept] = useState('PD-01 (Product Team)');
-  const [role, setRole] = useState('Member');
+  const [dept, setDept] = useState('프로덕트팀');
+  const [role, setRole] = useState('팀원');
   const [isIssued, setIsIssued] = useState(false);
   const [isFlipped, setIsFlipped] = useState(false);
   const [timeLeft, setTimeLeft] = useState(30);
@@ -13,14 +13,14 @@ function App() {
 
   useEffect(() => {
     if (name === '임소정') {
-      setDept('BX (Brand Experience Team)');
-      setRole('Brand Designer (브랜드 디자이너)');
+      setDept('브랜드경험팀');
+      setRole('브랜드 디자이너');
     } else if (name === '류나온') {
-      setDept('OS (Operations & Culture Team)');
-      setRole('General Manager (총괄 매니저)');
+      setDept('운영문화팀');
+      setRole('총괄 매니저');
     } else if (name === '양소연') {
-      setDept('OS (Operations & Culture Team)');
-      setRole('People Manager (인사 및 문화 담당)');
+      setDept('운영문화팀');
+      setRole('인사 및 문화 담당');
     }
   }, [name]);
 
@@ -129,7 +129,7 @@ function App() {
 
       <form className="glass-panel form-card" onSubmit={handleIssue}>
         <div className="input-group">
-          <label htmlFor="userId">User ID</label>
+          <label htmlFor="userId">사원 ID (User ID)</label>
           <input
             id="userId"
             className="input-field"
@@ -140,7 +140,7 @@ function App() {
         </div>
         
         <div className="input-group">
-          <label htmlFor="name">Name</label>
+          <label htmlFor="name">이름 (Name)</label>
           <input
             id="name"
             className="input-field"
@@ -151,7 +151,7 @@ function App() {
         </div>
 
         <div className="input-group">
-          <label htmlFor="dept">Department</label>
+          <label htmlFor="dept">부서</label>
           <input
             id="dept"
             className="input-field"
@@ -162,7 +162,7 @@ function App() {
         </div>
 
         <div className="input-group">
-          <label htmlFor="role">Position</label>
+          <label htmlFor="role">직책</label>
           <input
             id="role"
             className="input-field"
@@ -222,10 +222,10 @@ function App() {
                     <div className="signature">{name}</div>
                   </div>
                   <div className="dept-badge">
-                    <span className="dept-label">DEPT:</span> {dept}
+                    <span className="dept-label">부서:</span> {dept}
                   </div>
                   <div className="dept-badge">
-                    <span className="dept-label">ROLE:</span> {role}
+                    <span className="dept-label">직책:</span> {role}
                   </div>
                   <div className="joined-date">
                     JOINED: {getJoinedDate()}
