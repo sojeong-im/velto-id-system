@@ -4,10 +4,22 @@ import './index.css';
 function App() {
   const [userId, setUserId] = useState('');
   const [name, setName] = useState('');
+  const [dept, setDept] = useState('PD-01 (Product Team)');
+  const [role, setRole] = useState('Member');
   const [isIssued, setIsIssued] = useState(false);
   const [isFlipped, setIsFlipped] = useState(false);
   const [timeLeft, setTimeLeft] = useState(30);
   const [validUntil, setValidUntil] = useState('');
+
+  useEffect(() => {
+    if (name === '임소정') {
+      setDept('BX (Brand Experience Team)');
+      setRole('Brand Designer (브랜드 디자이너)');
+    } else if (name === '류나온') {
+      setDept('OS (Operations & Culture Team)');
+      setRole('General Manager (총괄 매니저)');
+    }
+  }, [name]);
 
   useEffect(() => {
     if (!isIssued) return;
@@ -53,6 +65,15 @@ function App() {
       return (
         <img 
           src="/sojeong.jpg" 
+          alt="Profile" 
+          className="profile-img"
+        />
+      );
+    }
+    if (fullName === '류나온') {
+      return (
+        <img 
+          src="/NAON.jpg" 
           alt="Profile" 
           className="profile-img"
         />
@@ -117,6 +138,28 @@ function App() {
           />
         </div>
 
+        <div className="input-group">
+          <label htmlFor="dept">Department</label>
+          <input
+            id="dept"
+            className="input-field"
+            type="text"
+            value={dept}
+            onChange={(e) => setDept(e.target.value)}
+          />
+        </div>
+
+        <div className="input-group">
+          <label htmlFor="role">Position</label>
+          <input
+            id="role"
+            className="input-field"
+            type="text"
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+          />
+        </div>
+
         <button type="submit" className="btn-primary">
           사원증 발급 / 조회
         </button>
@@ -167,7 +210,10 @@ function App() {
                     <div className="signature">{name}</div>
                   </div>
                   <div className="dept-badge">
-                    <span className="dept-label">DEPT:</span> PD-01 (Product Team)
+                    <span className="dept-label">DEPT:</span> {dept}
+                  </div>
+                  <div className="dept-badge">
+                    <span className="dept-label">ROLE:</span> {role}
                   </div>
                   <div className="joined-date">
                     JOINED: {getJoinedDate()}
@@ -230,7 +276,7 @@ function App() {
               <div className="auth-data-container">
                 <div className="auth-label">ENCRYPTED ID DATA</div>
                 <div className="auth-data">
-                  [AUTH_DATA]: {userId}_{name}
+                  [AUTH_DATA]: {userId}_{name}_{dept}_{role}
                 </div>
               </div>
               
