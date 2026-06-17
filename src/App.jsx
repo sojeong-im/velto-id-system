@@ -69,7 +69,7 @@ function App() {
       const isThick = (i * timeLeft) % 3 === 0;
       const width = isThick ? '3px' : '1px';
       const opacity = (i + timeLeft) % 2 === 0 ? 1 : 0.5;
-      stripes.push(<div key={i} style={{ width, opacity, height: '100%', backgroundColor: 'var(--color-text)', marginRight: '2px' }} />);
+      stripes.push(<div key={i} style={{ width, opacity, height: '100%', backgroundColor: 'currentColor', marginRight: '2px' }} />);
     }
     return stripes;
   };
@@ -129,99 +129,57 @@ function App() {
         >
           <div className="id-card-inner">
             {/* Front of Card */}
-            <div className="glass-panel card-face card-front tech-bg">
-              <div className="crosshair top-left"></div>
-              <div className="crosshair top-right"></div>
-              <div className="crosshair bottom-left"></div>
-              <div className="crosshair bottom-right"></div>
-              <div className="scale-rule scale-left"></div>
-              <div className="scale-rule scale-right"></div>
+            <div className="glass-panel card-face card-front white-card">
+              <div className="card-orb"></div>
+              <div className="card-wave-1"></div>
+              <div className="card-wave-2"></div>
 
-              <div className="card-header">
-                <div className="header-left">
-                  <span className="tag">● VELTO MEMBER</span>
-                  <span className="sys-ver">SYS_VER: 2026.06</span>
-                </div>
-                <div className="header-right">
-                  <span className="id-text">{userId}</span>
-                  <span className="auth-level">AUTH-LEVEL: 01</span>
-                </div>
+              <div className="card-top-status">
+                <span className="sync-blink"></span>
+                <span>SYS_VER: 2026.06 // SYNC: [{timeLeft}s ◷]</span>
               </div>
-              
-              <div className="profile-section">
-                <div className="profile-container">
-                  <svg className="profile-metrics" viewBox="0 0 160 160">
-                    <circle cx="80" cy="80" r="78" fill="none" stroke="var(--color-accent)" strokeWidth="1" strokeDasharray="4 4" opacity="0.8"/>
-                    <line x1="80" y1="0" x2="80" y2="6" stroke="var(--color-accent)" strokeWidth="2" />
-                    <line x1="80" y1="154" x2="80" y2="160" stroke="var(--color-accent)" strokeWidth="2" />
-                    <line x1="0" y1="80" x2="6" y2="80" stroke="var(--color-accent)" strokeWidth="2" />
-                    <line x1="154" y1="80" x2="160" y2="80" stroke="var(--color-accent)" strokeWidth="2" />
-                    <text x="80" y="15" fill="var(--color-accent)" fontSize="8" textAnchor="middle" opacity="0.6">0°</text>
-                    <text x="145" y="83" fill="var(--color-accent)" fontSize="8" textAnchor="middle" opacity="0.6">90°</text>
-                    <text x="80" y="150" fill="var(--color-accent)" fontSize="8" textAnchor="middle" opacity="0.6">180°</text>
-                    <text x="15" y="83" fill="var(--color-accent)" fontSize="8" textAnchor="middle" opacity="0.6">270°</text>
-                  </svg>
-                  <div className="profile-placeholder">
-                    {renderProfileContent(name)}
-                  </div>
-                </div>
 
-                <div className="timer-container">
-                  <div className="timer-text">
-                    VALID UNTIL: {validUntil} <span className="time-left">[ {timeLeft}s ◷ ]</span>
-                  </div>
-                  <div className="timer-bar-bg">
-                    <div className="timer-bar-fill" style={{ width: `${(timeLeft / 30) * 100}%` }}></div>
-                  </div>
+              <div className="profile-top-right">
+                {renderProfileContent(name)}
+              </div>
+
+              <div className="card-left-info">
+                <div className="info-item">
+                  <span className="info-item-label">Name</span>
+                  <span className="info-item-value-name">{name}</span>
                 </div>
-                
-                <div className="info-section">
-                  <div className="name-wrapper">
-                    <div className="name">{name}</div>
-                    <div className="signature">{name}</div>
-                  </div>
-                  <div className="dept-badge">
-                    <span className="dept-label">DEPT:</span> PD-01 (Product Team)
-                  </div>
-                  <div className="joined-date">
-                    JOINED: {getJoinedDate()}
-                  </div>
+                <div className="info-item">
+                  <span className="info-item-label">Position</span>
+                  <span className="info-item-value-pos">
+                    {name === '임소정' || userId === 'toqn1' ? 'Director' : 'Product Designer'}
+                  </span>
                 </div>
               </div>
 
-              <div className="card-footer-front">
-                <div className="dynamic-qr-front">
-                  <div className="qr-scan-line"></div>
-                  {/* Small QR placeholder */}
-                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 3H10V10H3V3Z" fill="currentColor"/>
-                    <path d="M14 3H21V10H14V3Z" fill="currentColor"/>
-                    <path d="M3 14H10V21H3V14Z" fill="currentColor"/>
-                    <rect x="14" y="14" width="3" height="3" fill="currentColor"/>
-                    <rect x="18" y="18" width="3" height="3" fill="currentColor"/>
-                    <rect x="14" y="18" width="3" height="3" fill="currentColor"/>
-                    <rect x="18" y="14" width="3" height="3" fill="currentColor"/>
+              <div className="bar-chart-container">
+                <div className="chart-bar" style={{ height: '30%', transitionDelay: '0.1s' }}></div>
+                <div className="chart-bar" style={{ height: '48%', transitionDelay: '0.2s' }}></div>
+                <div className="chart-bar" style={{ height: '62%', transitionDelay: '0.3s' }}></div>
+                <div className="chart-bar" style={{ height: '75%', transitionDelay: '0.4s' }}></div>
+                <div className="chart-bar" style={{ height: '88%', transitionDelay: '0.5s' }}></div>
+                <div className="chart-bar" style={{ height: '100%', transitionDelay: '0.6s' }}></div>
+              </div>
+
+              <div className="dept-pill">
+                <span className="dept-pill-icon">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                    <path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z" />
                   </svg>
-                </div>
-                <div className="barcode-slogan-wrapper">
-                  <div className="barcode-container">
-                    {generateBarcode()}
-                  </div>
-                  <div className="slogan">
-                    "We turn creative feelings into smart logic."
-                  </div>
-                </div>
+                </span>
+                <span>{name === '임소정' || userId === 'toqn1' ? 'Business Strategy' : 'Product Team'}</span>
               </div>
             </div>
 
             {/* Back of Card */}
-            <div className="glass-panel card-face card-back tech-bg">
-              <div className="crosshair top-left"></div>
-              <div className="crosshair top-right"></div>
-              <div className="crosshair bottom-left"></div>
-              <div className="crosshair bottom-right"></div>
-
-              <div className="sys-ver back-ver">VELTO SECURE NETWORK</div>
+            <div className="glass-panel card-face card-back white-card">
+              <div className="card-top-status" style={{ left: '50%', transform: 'translateX(-50%)', top: '24px' }}>
+                VELTO SECURE NETWORK
+              </div>
               
               <div className="qr-container-back">
                 <div className="qr-brackets top-left"></div>
@@ -232,14 +190,14 @@ function App() {
                 
                 <div className="qr-placeholder-large">
                   <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4 4H10V10H4V4Z" fill="#ffffff"/>
-                    <path d="M14 4H20V10H14V4Z" fill="#ffffff"/>
-                    <path d="M4 14H10V20H4V14Z" fill="#ffffff"/>
-                    <path d="M14 14H16V16H14V14Z" fill="#ffffff"/>
-                    <path d="M18 14H20V16H18V14Z" fill="#ffffff"/>
-                    <path d="M14 18H16V20H14V18Z" fill="#ffffff"/>
-                    <path d="M18 18H20V20H18V18Z" fill="#ffffff"/>
-                    <path d="M16 16H18V18H16V16Z" fill="#ffffff"/>
+                    <path d="M4 4H10V10H4V4Z" fill="currentColor"/>
+                    <path d="M14 4H20V10H14V4Z" fill="currentColor"/>
+                    <path d="M4 14H10V20H4V14Z" fill="currentColor"/>
+                    <rect x="14" y="14" width="2" height="2" fill="currentColor"/>
+                    <rect x="18" y="18" width="2" height="2" fill="currentColor"/>
+                    <rect x="14" y="18" width="2" height="2" fill="currentColor"/>
+                    <rect x="18" y="14" width="2" height="2" fill="currentColor"/>
+                    <rect x="16" y="16" width="2" height="2" fill="currentColor"/>
                   </svg>
                 </div>
               </div>
@@ -250,8 +208,12 @@ function App() {
                   [AUTH_DATA]: {userId}_{name}
                 </div>
               </div>
+
+              <div className="barcode-back-container">
+                {generateBarcode()}
+              </div>
               
-              <div className="slogan">
+              <div className="slogan-back">
                 "We turn creative feelings into smart logic."
               </div>
 
