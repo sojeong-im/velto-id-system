@@ -147,17 +147,6 @@ function App() {
               
               <div className="profile-section">
                 <div className="profile-container">
-                  <svg className="profile-metrics" viewBox="0 0 160 160">
-                    <circle cx="80" cy="80" r="78" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="4 4" opacity="0.8"/>
-                    <line x1="80" y1="0" x2="80" y2="6" stroke="currentColor" strokeWidth="2" />
-                    <line x1="80" y1="154" x2="80" y2="160" stroke="currentColor" strokeWidth="2" />
-                    <line x1="0" y1="80" x2="6" y2="80" stroke="currentColor" strokeWidth="2" />
-                    <line x1="154" y1="80" x2="160" y2="80" stroke="currentColor" strokeWidth="2" />
-                    <text x="80" y="15" fill="currentColor" fontSize="8" textAnchor="middle" opacity="0.6">0°</text>
-                    <text x="145" y="83" fill="currentColor" fontSize="8" textAnchor="middle" opacity="0.6">90°</text>
-                    <text x="80" y="150" fill="currentColor" fontSize="8" textAnchor="middle" opacity="0.6">180°</text>
-                    <text x="15" y="83" fill="currentColor" fontSize="8" textAnchor="middle" opacity="0.6">270°</text>
-                  </svg>
                   <div className="profile-placeholder">
                     {renderProfileContent(name)}
                   </div>
