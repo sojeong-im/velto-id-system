@@ -18,6 +18,9 @@ function App() {
     } else if (name === '류나온') {
       setDept('OS (Operations & Culture Team)');
       setRole('General Manager (총괄 매니저)');
+    } else if (name === '양소연') {
+      setDept('OS (Operations & Culture Team)');
+      setRole('People Manager (인사 및 문화 담당)');
     }
   }, [name]);
 
@@ -74,6 +77,15 @@ function App() {
       return (
         <img 
           src="/NAON.jpg" 
+          alt="Profile" 
+          className="profile-img"
+        />
+      );
+    }
+    if (fullName === '양소연') {
+      return (
+        <img 
+          src="/SO.jpg" 
           alt="Profile" 
           className="profile-img"
         />
