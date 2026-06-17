@@ -288,7 +288,7 @@ function App() {
               <div className="auth-data-container">
                 <div className="auth-label">ENCRYPTED ID DATA</div>
                 <div className="auth-data">
-                  [AUTH_DATA]: {userId}_{name}_{dept}_{role}
+                  [AUTH_DATA]: {userId}_{name}
                 </div>
               </div>
               
