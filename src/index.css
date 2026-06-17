@@ -857,5 +857,73 @@ h1 {
   border-radius: 50% !important;
 }
 
+/* ==========================================
+   Mobile Responsiveness & Scaling Enhancements
+   ========================================== */
+@media (max-width: 440px) {
+  #root {
+    padding: 24px 16px;
+    gap: 24px;
+  }
+  
+  .card-face {
+    padding: 20px !important;
+  }
+  
+  .white-card .profile-container,
+  .white-card .profile-placeholder {
+    width: 150px !important;
+    height: 150px !important;
+  }
+  
+  .white-card .name {
+    font-size: 1.6rem !important;
+  }
+  
+  .white-card .dept-badge {
+    font-size: 0.72rem !important;
+    padding: 4px 8px !important;
+  }
+  
+  .white-card.card-back {
+    padding: 20px !important;
+    gap: 16px !important;
+  }
+  
+  .white-card .qr-placeholder-large {
+    width: 120px !important;
+    height: 120px !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .card-face {
+    padding: 16px !important;
+  }
+  
+  .white-card .profile-container,
+  .white-card .profile-placeholder {
+    width: 135px !important;
+    height: 135px !important;
+  }
+  
+  .white-card .name {
+    font-size: 1.4rem !important;
+  }
+  
+  .wallet-buttons {
+    flex-direction: column !important;
+    gap: 8px !important;
+    width: 100% !important;
+  }
+  
+  .wallet-btn {
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 8px 12px !important;
+  }
+}
+
+
 
 
