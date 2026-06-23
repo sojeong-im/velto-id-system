@@ -11,6 +11,75 @@ function App() {
   const [timeLeft, setTimeLeft] = useState(30);
   const [validUntil, setValidUntil] = useState('');
 
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [passcode, setPasscode] = useState('');
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    if (isAuthenticated) return;
+
+    const handleKeyDown = (e) => {
+      if (hasError) return;
+
+      if (e.key >= '0' && e.key <= '9') {
+        setPasscode((prev) => {
+          if (prev.length < 5) {
+            return prev + e.key;
+          }
+          return prev;
+        });
+      } else if (e.key === 'Backspace') {
+        setPasscode((prev) => prev.slice(0, -1));
+      } else if (e.key === 'Escape') {
+        setPasscode('');
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isAuthenticated, hasError]);
+
+  useEffect(() => {
+    if (passcode.length === 5) {
+      if (passcode === '00347') {
+        setIsAuthenticated(true);
+      } else {
+        setHasError(true);
+        const timer = setTimeout(() => {
+          setPasscode('');
+          setHasError(false);
+        }, 500);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [passcode]);
+
+  const handleKeypadPress = (val) => {
+    if (hasError) return;
+    if (val === 'clear') {
+      setPasscode('');
+    } else if (val === 'backspace') {
+      setPasscode((prev) => prev.slice(0, -1));
+    } else {
+      setPasscode((prev) => {
+        if (prev.length < 5) {
+          return prev + val;
+        }
+        return prev;
+      });
+    }
+  };
+
+
+  const getEnglishName = () => {
+    const map = {
+      '임소정': 'Lim Sojeong',
+      '류나온': 'Ryu Naon',
+      '양소연': 'Yang Soyeon',
+    };
+    return map[name] || '';
+  };
+
   useEffect(() => {
     if (name === '임소정') {
       setDept('브랜드경험팀');
@@ -112,6 +181,74 @@ function App() {
     return "2026.01.15";
   };
 
+  if (!isAuthenticated) {
+    return (
+      <div className={`glass-panel lock-screen-card ${hasError ? 'shake' : ''}`}>
+        <div className="lock-screen-header">
+          <div className="lock-icon-wrapper">
+            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+            </svg>
+          </div>
+          <h2 className="lock-screen-title">VELTO SECURE ACCESS</h2>
+          <p className="lock-screen-subtitle">시스템 접속을 위해 5자리 비밀번호를 입력해주세요.</p>
+        </div>
+
+        <div className="pin-display-container">
+          {[...Array(5)].map((_, i) => (
+            <div
+              key={i}
+              className={`pin-dot ${i < passcode.length ? 'filled' : ''} ${hasError ? 'error' : ''}`}
+            />
+          ))}
+        </div>
+
+        <div className={`lock-error-message ${hasError ? 'visible' : ''}`}>
+          올바르지 않은 비밀번호입니다. 다시 시도해 주세요.
+        </div>
+
+        <div className="keypad-grid">
+          {['1', '2', '3', '4', '5', '6', '7', '8', '9'].map((num) => (
+            <button
+              key={num}
+              type="button"
+              className="keypad-btn"
+              onClick={() => handleKeypadPress(num)}
+            >
+              {num}
+            </button>
+          ))}
+          <button
+            type="button"
+            className="keypad-btn action-btn"
+            onClick={() => handleKeypadPress('clear')}
+          >
+            Clear
+          </button>
+          <button
+            type="button"
+            className="keypad-btn"
+            onClick={() => handleKeypadPress('0')}
+          >
+            0
+          </button>
+          <button
+            type="button"
+            className="keypad-btn action-btn backspace-btn"
+            onClick={() => handleKeypadPress('backspace')}
+          >
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z" />
+              <line x1="18" y1="9" x2="12" y2="15" />
+              <line x1="12" y1="9" x2="18" y2="15" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <>
       <header>
@@ -207,19 +344,14 @@ function App() {
                   </div>
                 </div>
 
-                <div className="timer-container">
-                  <div className="timer-text">
-                    VALID UNTIL: {validUntil} <span className="time-left">[ {timeLeft}s ◷ ]</span>
-                  </div>
-                  <div className="timer-bar-bg">
-                    <div className="timer-bar-fill" style={{ width: `${(timeLeft / 30) * 100}%` }}></div>
-                  </div>
-                </div>
+
                 
                 <div className="info-section">
                   <div className="name-wrapper">
-                    <div className="name">{name}</div>
-                    <div className="signature">{name}</div>
+                    <div className="name-row">
+                      <div className="name">{name}</div>
+                      {getEnglishName() && <div className="name-en">{getEnglishName()}</div>}
+                    </div>
                   </div>
                   <div className="dept-badge">
                     <span className="dept-label">부서:</span> {dept}
@@ -227,8 +359,8 @@ function App() {
                   <div className="dept-badge">
                     <span className="dept-label">직책:</span> {role}
                   </div>
-                  <div className="joined-date">
-                    JOINED: {getJoinedDate()}
+                  <div className="email-badge">
+                    blt.official_01@belto.com
                   </div>
                 </div>
               </div>

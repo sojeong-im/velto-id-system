@@ -435,15 +435,31 @@ h1 {
 
 .name-wrapper {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.name-row {
+  display: flex;
   align-items: baseline;
   justify-content: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .name {
   font-size: 1.8rem;
   font-weight: 800;
   letter-spacing: -0.02em;
+}
+
+.name-en {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0em;
+  color: #1e293b;
+  opacity: 1;
 }
 
 .signature {
@@ -456,17 +472,22 @@ h1 {
 
 .dept-badge {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.75rem;
+  font-size: 0.95rem;
   color: var(--color-text);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 4px 10px;
-  border-radius: 4px;
-  background: rgba(0, 0, 0, 0.4);
 }
 
 .dept-label {
   color: var(--color-accent);
   font-weight: 700;
+}
+
+.email-badge {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  color: #1e293b;
+  letter-spacing: 0em;
+  opacity: 1;
+  margin-top: 2px;
 }
 
 .joined-date {
@@ -756,18 +777,26 @@ h1 {
   color: #0f172a !important;
 }
 
+.white-card .name-en {
+  color: #1e293b !important;
+}
+
 .white-card .signature {
   color: #64748b !important;
 }
 
 .white-card .dept-badge {
-  border: 1px solid rgba(226, 232, 240, 0.8) !important;
-  background: rgba(248, 250, 252, 0.95) !important;
   color: #334155 !important;
+  border: none !important;
+  background: none !important;
 }
 
 .white-card .dept-label {
   color: #2563eb !important;
+}
+
+.white-card .email-badge {
+  color: #1e293b !important;
 }
 
 .white-card .joined-date {
@@ -923,6 +952,163 @@ h1 {
     padding: 8px 12px !important;
   }
 }
+
+/* Lock Screen Styles */
+.lock-screen-card {
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  text-align: center;
+}
+
+.lock-screen-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.lock-icon-wrapper {
+  color: var(--color-accent);
+  background: rgba(37, 99, 235, 0.08);
+  padding: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  box-shadow: 0 0 15px rgba(37, 99, 235, 0.1);
+}
+
+.lock-screen-title {
+  font-size: 1.35rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  text-transform: uppercase;
+}
+
+.lock-screen-subtitle {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.pin-display-container {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  height: 32px;
+  margin: 8px 0;
+}
+
+.pin-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--color-accent);
+  background: transparent;
+  transition: all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.pin-dot.filled {
+  background: var(--color-accent);
+  transform: scale(1.1);
+  box-shadow: 0 0 8px rgba(37, 99, 235, 0.4);
+}
+
+.pin-dot.error {
+  border-color: #ef4444 !important;
+  background: #ef4444 !important;
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.4) !important;
+}
+
+.lock-screen-card.shake {
+  animation: shake 0.4s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-10px); }
+  40%, 80% { transform: translateX(10px); }
+}
+
+.keypad-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  width: 100%;
+  max-width: 280px;
+  margin-top: 16px;
+}
+
+.keypad-btn {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid var(--color-card-border);
+  background: rgba(255, 255, 255, 0.6);
+  color: var(--color-text);
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.02);
+  user-select: none;
+  outline: none;
+}
+
+.keypad-btn:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+}
+
+.keypad-btn:active {
+  background: rgba(37, 99, 235, 0.1);
+  border-color: var(--color-accent);
+  transform: scale(0.95);
+}
+
+.keypad-btn.action-btn {
+  font-size: 0.9rem;
+  font-family: 'Inter', sans-serif;
+  color: var(--color-text-muted);
+}
+
+.keypad-btn.action-btn:hover {
+  color: #ef4444;
+  border-color: rgba(239, 68, 68, 0.4);
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.keypad-btn.action-btn.backspace-btn:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  background: rgba(37, 99, 235, 0.05);
+}
+
+.lock-error-message {
+  font-size: 0.8rem;
+  color: #ef4444;
+  height: 16px;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  margin-top: -8px;
+}
+
+.lock-error-message.visible {
+  opacity: 1;
+}
+
 
 
 
