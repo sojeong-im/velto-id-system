@@ -80,6 +80,7 @@ function App() {
       '권한별': 'Kwon Hanbyul',
       '권희원': 'Kwon Heewon',
       '이재환': 'Lee Jaehwan',
+      '강준서': 'Kang Junseo',
     };
     return map[name] || '';
   };
@@ -104,6 +105,9 @@ function App() {
       setDept('코칭지원팀');
       setRole('코칭사');
     } else if (name === '이재환') {
+      setDept('코칭지원팀');
+      setRole('코칭사');
+    } else if (name === '강준서') {
       setDept('코칭지원팀');
       setRole('코칭사');
     }
@@ -202,6 +206,11 @@ function App() {
     if (fullName === '이재환') {
       return (
         <img src="/JAEHWAN.jpg" alt="Profile" className="profile-img" />
+      );
+    }
+    if (fullName === '강준서') {
+      return (
+        <img src="/JUNSEO.jpg" alt="Profile" className="profile-img" />
       );
     }
     if (!fullName) return '';
