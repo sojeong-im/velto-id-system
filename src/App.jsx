@@ -82,6 +82,7 @@ function App() {
       '이재환': 'Lee Jaehwan',
       '강준서': 'Kang Junseo',
       '인서진': 'In Seojin',
+      '김성현': 'Kim Sunghyun',
     };
     return map[name] || '';
   };
@@ -112,6 +113,9 @@ function App() {
       setDept('코칭지원팀');
       setRole('코칭사');
     } else if (name === '인서진') {
+      setDept('코칭지원팀');
+      setRole('코칭사');
+    } else if (name === '김성현') {
       setDept('코칭지원팀');
       setRole('코칭사');
     }
@@ -220,6 +224,11 @@ function App() {
     if (fullName === '인서진') {
       return (
         <img src="/SEOJIN.jpg" alt="Profile" className="profile-img" />
+      );
+    }
+    if (fullName === '김성현') {
+      return (
+        <img src="/SUNGHYUN.jpg" alt="Profile" className="profile-img" />
       );
     }
     if (!fullName) return '';
