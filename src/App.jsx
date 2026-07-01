@@ -83,6 +83,7 @@ function App() {
       '강준서': 'Kang Junseo',
       '인서진': 'In Seojin',
       '김성현': 'Kim Sunghyun',
+      '박성민': 'Park Sungmin',
     };
     return map[name] || '';
   };
@@ -116,6 +117,9 @@ function App() {
       setDept('코칭지원팀');
       setRole('코칭사');
     } else if (name === '김성현') {
+      setDept('코칭지원팀');
+      setRole('코칭사');
+    } else if (name === '박성민') {
       setDept('코칭지원팀');
       setRole('코칭사');
     }
@@ -229,6 +233,11 @@ function App() {
     if (fullName === '김성현') {
       return (
         <img src="/SUNGHYUN.jpg" alt="Profile" className="profile-img" />
+      );
+    }
+    if (fullName === '박성민') {
+      return (
+        <img src="/SUNGMIN.jpg" alt="Profile" className="profile-img" />
       );
     }
     if (!fullName) return '';
