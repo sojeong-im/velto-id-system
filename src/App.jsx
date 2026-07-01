@@ -76,6 +76,7 @@ function App() {
       '임소정': 'Lim Sojeong',
       '류나온': 'Ryu Naon',
       '양소연': 'Yang Soyeon',
+      '남가인': 'Nam Gain',
     };
     return map[name] || '';
   };
@@ -90,6 +91,9 @@ function App() {
     } else if (name === '양소연') {
       setDept('운영문화팀');
       setRole('인사 및 문화 담당');
+    } else if (name === '남가인') {
+      setDept('코칭지원팀');
+      setRole('코칭사');
     }
   }, [name]);
 
@@ -155,6 +159,15 @@ function App() {
       return (
         <img 
           src="/SO.jpg" 
+          alt="Profile" 
+          className="profile-img"
+        />
+      );
+    }
+    if (fullName === '남가인') {
+      return (
+        <img 
+          src="/GAIN.jpg" 
           alt="Profile" 
           className="profile-img"
         />
