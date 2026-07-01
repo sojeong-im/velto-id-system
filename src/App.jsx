@@ -78,6 +78,7 @@ function App() {
       '양소연': 'Yang Soyeon',
       '남가인': 'Nam Gain',
       '권한별': 'Kwon Hanbyul',
+      '권희원': 'Kwon Heewon',
     };
     return map[name] || '';
   };
@@ -96,6 +97,9 @@ function App() {
       setDept('코칭지원팀');
       setRole('코칭사');
     } else if (name === '권한별') {
+      setDept('코칭지원팀');
+      setRole('코칭사');
+    } else if (name === '권희원') {
       setDept('코칭지원팀');
       setRole('코칭사');
     }
@@ -181,6 +185,15 @@ function App() {
       return (
         <img 
           src="/HANBYUL.jpg" 
+          alt="Profile" 
+          className="profile-img"
+        />
+      );
+    }
+    if (fullName === '권희원') {
+      return (
+        <img 
+          src="/HEEWON.jpg" 
           alt="Profile" 
           className="profile-img"
         />
