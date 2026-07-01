@@ -77,6 +77,7 @@ function App() {
       '류나온': 'Ryu Naon',
       '양소연': 'Yang Soyeon',
       '남가인': 'Nam Gain',
+      '권한별': 'Kwon Hanbyul',
     };
     return map[name] || '';
   };
@@ -92,6 +93,9 @@ function App() {
       setDept('운영문화팀');
       setRole('인사 및 문화 담당');
     } else if (name === '남가인') {
+      setDept('코칭지원팀');
+      setRole('코칭사');
+    } else if (name === '권한별') {
       setDept('코칭지원팀');
       setRole('코칭사');
     }
@@ -168,6 +172,15 @@ function App() {
       return (
         <img 
           src="/GAIN.jpg" 
+          alt="Profile" 
+          className="profile-img"
+        />
+      );
+    }
+    if (fullName === '권한별') {
+      return (
+        <img 
+          src="/HANBYUL.jpg" 
           alt="Profile" 
           className="profile-img"
         />
